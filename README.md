@@ -1,1 +1,1 @@
-# This is a simple UNIX shell interpreter done as part of ALX low-level programming team project.
+# This is a simple UNIX shell interpreter done as part of the ALX low-level programming team project.
