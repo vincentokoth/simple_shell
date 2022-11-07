@@ -1,1 +1,1 @@
-This is our UNIX shell command-line interpreter written as part of ALX low-level programming team project
+This is our simple UNIX command interpreter written as part of ALX team project
