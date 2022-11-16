@@ -3,9 +3,9 @@
 
 /*
  * File: shell.h
- * Author: Vincent Okoth
- *	Cheserem Titus
+ * Authors: Vincent Okoth && Cheserem Titus
  */
+
 
 #include <fcntl.h>
 #include <signal.h>
@@ -32,7 +32,6 @@ int hist;
  * @dir: A directory path.
  * @next: A pointer to another struct list_s.
  */
-
 typedef struct list_s
 {
 	char *dir;
@@ -44,7 +43,6 @@ typedef struct list_s
  * @name: The name of the builtin command.
  * @f: A function pointer to the builtin command's function.
  */
-
 typedef struct builtin_s
 {
 	char *name;
@@ -57,7 +55,6 @@ typedef struct builtin_s
  * @value: The value of the alias.
  * @next: A pointer to another struct alias_s
  */
-
 typedef struct alias_s
 {
 	char *name;
@@ -85,6 +82,7 @@ char *get_args(char **line, int *exe_ret);
 int call_args(char **args, char **front, int *exe_ret);
 int run_args(char **args, char **front, int *exe_ret);
 int handle_args(int *exe_ret);
+int check_args(char **args);
 void free_args(char **args, char **front);
 char **replace_aliases(char **args);
 
@@ -96,7 +94,7 @@ char *_strcpy(char *dest, const char *src);
 char *_strchr(char *s, char c);
 int _strspn(char *s, char *accept);
 int _strcmp(char *s1, char *s2);
-int _strncmp(constant char *s1, const char *s2, size_t n);
+int _strncmp(const char *s1, const char *s2, size_t n);
 
 /* Builtins */
 int (*get_builtin(char *command))(char **args, char **front);
@@ -107,6 +105,11 @@ int shellvt_unsetenv(char **args, char __attribute__((__unused__)) **front);
 int shellvt_cd(char **args, char __attribute__((__unused__)) **front);
 int shellvt_alias(char **args, char __attribute__((__unused__)) **front);
 int shellvt_help(char **args, char __attribute__((unused)) **front);
+
+/* Builtin Helpers*/
+char **_copyenv(void);
+void free_env(void);
+char **_getenv(const char *var);
 
 /* Error Handling*/
 int create_error(char **args, int err);
@@ -120,7 +123,7 @@ char *error_127(char **args);
 
 /* Linked list Helpers*/
 alias_t *add_alias_end(alias_t **head, char *name, char *value);
-void free_alias_list(aliase_t *head);
+void free_alias_list(alias_t *head);
 list_t *add_node_end(list_t **head, char *dir);
 void free_list(list_t *head);
 
@@ -128,8 +131,10 @@ void help_all(void);
 void help_alias(void);
 void help_cd(void);
 void help_exit(void);
+void help_help(void);
 void help_env(void);
 void help_setenv(void);
+void help_unsetenv(void);
 void help_history(void);
 
 int proc_file_commands(char *file_path, int *exe_ret);
