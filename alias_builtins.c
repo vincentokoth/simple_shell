@@ -3,11 +3,12 @@
  * Authors: Vincent Okoth and Titus Cheserem
  */
 
+
 #include "shell.h"
 
 int shellvt_alias(char **args, char __attribute__((__unused__)) **front);
 void set_alias(char *var_name, char *value);
-void print alias(alias_t *alias);
+void print_alias(alias_t *alias);
 
 /**
  * shellvt_alias - Builtin command either prints all aliases, specific
