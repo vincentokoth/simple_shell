@@ -31,7 +31,7 @@ int shellvt_env(char **args, char __attribute__((__unused__)) **front)
 	for (index = 0; environ[index]; index++)
 	{
 		write(STDOUT_FILENO, environ[index], _strlen(environ[index]));
-		write(STDPOT_FILENO, &nc, 1);
+		write(STDOUT_FILENO, &nc, 1);
 	}
 
 	(void)args;
@@ -85,7 +85,6 @@ int shellvt_setenv(char **args, char __attribute__((__unused__)) **front)
 		new_environ[index] = environ[index];
 
 	free(environ);
-	environ = new_environ;
 	environ = new_environ;
 	environ[index] = new_value;
 	environ[index + 1] = NULL;
